@@ -44,12 +44,15 @@
 
 - **损失函数**：带掩码的交叉熵损失（CrossEntropyWithPadding）+ 标签平滑。
 - **优化器**：Adam (β1=0.9, β2=0.98)。
+- **学习率调度**：实现 Noam 学习率调度器，随训练步数动态调整。
+- **训练监控**：集成 **TensorBoard**，实时记录训练/验证损失及学习率曲线。
+- **模型保存**：自动保存验证集表现最佳的检查点（`best.ckpt`）。
 - **核心脚本**：详细实现与训练结果见 `transformer_带bleu-autodl训练结果.ipynb`。
 
 ## 📈 评估指标
 
 - **BLEU Score**：使用 NLTK 库计算 BLEU-4 分数，定量衡量翻译质量。
-- **Attention Map**：生成 2D 矩阵热力图，可视化 Query 与 Key 之间的权重分布。
+- **Attention Map**：生成 2D 矩阵热力图，可视化 Query 与 Key 之间的权重分布，验证模型对齐效果。
 
 ## 📂 项目结构
 
@@ -58,6 +61,8 @@ Project2_Transformer/
 ├── wmt16/                  # WMT16 原始语料与 BPE 处理后的数据
 ├── wmt16_cut/              # Moses 分词后的中间结果
 ├── .cache/                 # 预处理数据缓存 (.npy)
+├── checkpoints/            # 模型检查点存储 (best.ckpt)
+├── runs/                   # TensorBoard 训练日志
 ├── transformer_带bleu-autodl训练结果.ipynb  # 核心实现、训练与评估
 ├── data_multi30k.py        # 基于 Moses 的数据清洗脚本
 └── README.md               # 项目说明文档
